@@ -307,17 +307,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Filial"
+                "$ref": "#/components/schemas/FilialDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Filial"
+                "$ref": "#/components/schemas/FilialDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Filial"
+                "$ref": "#/components/schemas/FilialDTO"
               }
             }
           }
@@ -390,7 +390,7 @@
         }
       }
     },
-    "/nome/{nomeFilial}": {
+    "/api/Filial/nome/{nomeFilial}": {
       "get": {
         "tags": [
           "Filial"
@@ -458,17 +458,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Filial"
+                "$ref": "#/components/schemas/FilialDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Filial"
+                "$ref": "#/components/schemas/FilialDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Filial"
+                "$ref": "#/components/schemas/FilialDTO"
               }
             }
           }
@@ -836,17 +836,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Moto"
+                "$ref": "#/components/schemas/MotoDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Moto"
+                "$ref": "#/components/schemas/MotoDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Moto"
+                "$ref": "#/components/schemas/MotoDTO"
               }
             }
           }
@@ -1075,17 +1075,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Moto"
+                "$ref": "#/components/schemas/MotoDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Moto"
+                "$ref": "#/components/schemas/MotoDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Moto"
+                "$ref": "#/components/schemas/MotoDTO"
               }
             }
           }
@@ -1142,17 +1142,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/MotoSetor"
+                "$ref": "#/components/schemas/MotoSetorDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/MotoSetor"
+                "$ref": "#/components/schemas/MotoSetorDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/MotoSetor"
+                "$ref": "#/components/schemas/MotoSetorDto"
               }
             }
           }
@@ -1203,6 +1203,46 @@
           }
         }
       },
+      "put": {
+        "tags": [
+          "MotoSetor"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MotoSetorDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MotoSetorDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MotoSetorDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "MotoSetor"
@@ -1218,48 +1258,6 @@
             }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/MotoSetor/{idPassado}": {
-      "put": {
-        "tags": [
-          "MotoSetor"
-        ],
-        "parameters": [
-          {
-            "name": "idPassado",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/MotoSetor"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/MotoSetor"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/MotoSetor"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK"
@@ -1522,10 +1520,6 @@
         "additionalProperties": false
       },
       "Filial": {
-        "required": [
-          "idEndereco",
-          "nome"
-        ],
         "type": "object",
         "properties": {
           "id": {
@@ -1533,7 +1527,24 @@
             "format": "int32"
           },
           "nome": {
-            "maxLength": 100,
+            "type": "string",
+            "nullable": true
+          },
+          "idEndereco": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FilialDTO": {
+        "required": [
+          "idEndereco",
+          "nome"
+        ],
+        "type": "object",
+        "properties": {
+          "nome": {
             "minLength": 1,
             "type": "string"
           },
@@ -1580,10 +1591,6 @@
         "additionalProperties": false
       },
       "Moto": {
-        "required": [
-          "idFilial",
-          "placa"
-        ],
         "type": "object",
         "properties": {
           "id": {
@@ -1591,25 +1598,44 @@
             "format": "int32"
           },
           "placa": {
-            "maxLength": 7,
-            "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "modelo": {
-            "maxLength": 50,
             "type": "string",
             "nullable": true
           },
           "ano": {
-            "maximum": 9999,
-            "minimum": 1000,
-            "maxLength": 4,
-            "minLength": 0,
             "type": "integer",
             "format": "int32"
           },
           "tipoCombustivel": {
-            "maxLength": 50,
+            "type": "string",
+            "nullable": true
+          },
+          "idFilial": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MotoDTO": {
+        "type": "object",
+        "properties": {
+          "placa": {
+            "type": "string",
+            "nullable": true
+          },
+          "modelo": {
+            "type": "string",
+            "nullable": true
+          },
+          "ano": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoCombustivel": {
             "type": "string",
             "nullable": true
           },
@@ -1621,12 +1647,6 @@
         "additionalProperties": false
       },
       "MotoSetor": {
-        "required": [
-          "data",
-          "fonte",
-          "idMoto",
-          "idSetor"
-        ],
         "type": "object",
         "properties": {
           "id": {
@@ -1638,9 +1658,30 @@
             "format": "date-time"
           },
           "fonte": {
-            "maxLength": 50,
-            "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "nullable": true
+          },
+          "idMoto": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idSetor": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MotoSetorDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fonte": {
+            "type": "string",
+            "nullable": true
           },
           "idMoto": {
             "type": "integer",

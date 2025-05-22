@@ -19,11 +19,11 @@ namespace Tria_2025.Data.Mappings
             builder.Property(f => f.IdEndereco)
                 .IsRequired();
 
-            //Configuração relacionamento 1:1 
+            //Configuração relacionamento
             builder.HasOne(f => f.Endereco)
-                .WithOne()
-                .HasForeignKey<Filial>(f => f.IdEndereco)
-                .OnDelete(DeleteBehavior.Restrict);
+                .WithMany() 
+                .HasForeignKey(f => f.IdEndereco)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

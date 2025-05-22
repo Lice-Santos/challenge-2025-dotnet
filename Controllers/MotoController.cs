@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Tria_2025.Connection;
+using Tria_2025.DTO;
 using Tria_2025.Models;
 
 namespace Tria_2025.Controllers
@@ -68,51 +69,63 @@ namespace Tria_2025.Controllers
 
             return Ok(motos);
         }
-        [HttpPut("{idPassado}")]
-        public async Task<ActionResult> Put(int idPassado, Moto moto)
-        {
-            if (moto.Id != idPassado)
-            {
-                return BadRequest("ID da url é diferente da url passada no corpo.");
-            }
 
+        [HttpPut("{idPassado}")]
+        public async Task<ActionResult> Put(int idPassado, MotoDTO motoDTO)
+        {
             var motoBuscada = await _context.Motos.FindAsync(idPassado);
             if (motoBuscada == null)
             {
-                return NotFound($"Não foi possivel encontrar uma moto com o id {idPassado}");
+                return NotFound($"Não foi possível encontrar uma moto com o id {idPassado}");
             }
 
-            if (moto.Placa != null)
-                motoBuscada.Placa = moto.Placa;
+            // Verifica se a filial existe
+            var filial = await _context.Filiais.FindAsync(motoDTO.IdFilial);
+            if (filial == null)
+            {
+                return BadRequest("Não foi possível encontrar a filial informada.");
+            }
 
-            if (moto.Modelo != null)
-                motoBuscada.Modelo = moto.Modelo;
-
-
-            if (moto.TipoCombustivel != null)
-                motoBuscada.TipoCombustivel = moto.TipoCombustivel;
-
-            motoBuscada.IdFilial = moto.IdFilial;
-            motoBuscada.Ano = moto.Ano;
-
-
+            // Atualiza os campos da moto
+            motoBuscada.Placa = motoDTO.Placa;
+            motoBuscada.Modelo = motoDTO.Modelo;
+            motoBuscada.TipoCombustivel = motoDTO.TipoCombustivel;
+            motoBuscada.Ano = motoDTO.Ano;
+            motoBuscada.IdFilial = motoDTO.IdFilial;
+            motoBuscada.Filial = filial;
 
             await _context.SaveChangesAsync();
             return NoContent();
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(Moto moto)
+        public async Task<ActionResult> Post(MotoDTO motoDTO)
         {
 
             if (!ModelState.IsValid)
             {
-                return BadRequest(moto);
+                return BadRequest(ModelState);
             }
 
-            _context.Motos.Add(moto);
+            var filialObjeto = await _context.Filiais.FindAsync(motoDTO.IdFilial);
+            if (filialObjeto == null)
+            {
+                return BadRequest("Não foi possível encontrar a filial passada");
+            }
+
+            var motoCompleta = new Moto
+            {
+                Ano = motoDTO.Ano,
+                Filial = filialObjeto,
+                Placa = motoDTO.Placa,
+                Modelo = motoDTO.Modelo,
+                TipoCombustivel = motoDTO.TipoCombustivel
+            };
+
+
+            _context.Motos.Add(motoCompleta);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(Get), new { id = moto.Id }, moto);
+            return CreatedAtAction(nameof(Get), new { id = motoCompleta.Id }, motoCompleta);
         }
 
         [HttpDelete("{id}")]

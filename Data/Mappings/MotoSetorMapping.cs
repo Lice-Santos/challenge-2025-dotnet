@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Reflection.Emit;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Tria_2025.Models;
 
@@ -23,7 +24,27 @@ namespace Tria_2025.Data.Mappings
                 .IsRequired();
 
             builder.Property(ms => ms.IdSetor)
-                .IsRequired();
+            .IsRequired();
+
+            builder.HasOne(ms => ms.Moto)
+                .WithMany()
+                .HasForeignKey(ms => ms.IdMoto)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(ms => ms.Setor)
+                .WithMany() 
+                .HasForeignKey(ms => ms.IdSetor)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(ms => ms.Moto)
+                .WithMany() 
+                .HasForeignKey(ms => ms.IdMoto)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(ms => ms.Setor)
+                .WithMany() 
+                .HasForeignKey(ms => ms.IdSetor)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

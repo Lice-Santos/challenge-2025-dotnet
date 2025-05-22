@@ -12,7 +12,7 @@ using Tria_2025.Connection;
 namespace Tria_2025.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250520200947_InitialCreate")]
+    [Migration("20250522134426_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -184,6 +184,10 @@ namespace Tria_2025.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IdMoto");
+
+                    b.HasIndex("IdSetor");
+
                     b.ToTable("Moto_Setor", (string)null);
                 });
 
@@ -213,6 +217,25 @@ namespace Tria_2025.Migrations
                         .IsRequired();
 
                     b.Navigation("Endereco");
+                });
+
+            modelBuilder.Entity("Tria_2025.Models.MotoSetor", b =>
+                {
+                    b.HasOne("Tria_2025.Models.Moto", "Moto")
+                        .WithMany()
+                        .HasForeignKey("IdMoto")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Tria_2025.Models.Setor", "Setor")
+                        .WithMany()
+                        .HasForeignKey("IdSetor")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Moto");
+
+                    b.Navigation("Setor");
                 });
 #pragma warning restore 612, 618
         }

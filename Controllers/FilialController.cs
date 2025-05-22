@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Tria_2025.Connection;
+using Tria_2025.DTO;
 using Tria_2025.Models;
 
 namespace Tria_2025.Controllers
@@ -36,7 +37,7 @@ namespace Tria_2025.Controllers
             return filial;
         }
 
-        [HttpGet("/nome/{nomeFilial}")]
+        [HttpGet("nome/{nomeFilial}")]
         public async Task<ActionResult<List<Filial>>> BuscarPorNome(string nomeFilial)
         {
             var filiais = await _context.Filiais.Where(c => c.Nome.ToLower().Contains(nomeFilial.ToLower())).ToListAsync();
@@ -49,42 +50,52 @@ namespace Tria_2025.Controllers
         }
 
         [HttpPut("{idPassado}")]
-        public async Task<ActionResult> Put(int idPassado, Filial filial)
+        public async Task<ActionResult> Put(int idPassado, FilialDTO filialDTO)
         {
-            if (filial.Id != idPassado)
-            {
-                return BadRequest("ID da url é diferente da url passada no corpo.");
-            }
-
             var filialBuscada = await _context.Filiais.FindAsync(idPassado);
             if (filialBuscada == null)
             {
-                return NotFound($"Não foi possivel encontrar uma filial com o id {idPassado}");
+                return NotFound($"Não foi possível encontrar uma filial com o ID {idPassado}.");
             }
 
-            if (filial.Nome != null)
-                filialBuscada.Nome = filial.Nome;
+            // Valida se o IdEndereco existe
+            var endereco = await _context.Enderecos.FindAsync(filialDTO.IdEndereco);
+            if (endereco == null)
+            {
+                return BadRequest("Endereço inválido. Não foi possível encontrar o endereço informado.");
+            }
 
-            if (filial.IdEndereco != null)
-                filialBuscada.IdEndereco = filial.IdEndereco;
-
+            // Atualiza os campos
+            filialBuscada.Nome = filialDTO.Nome;
+            filialBuscada.IdEndereco = filialDTO.IdEndereco;
 
             await _context.SaveChangesAsync();
             return NoContent();
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Post(Filial filial)
-        {
 
+        [HttpPost]
+        public async Task<ActionResult> Post(FilialDTO filialDTO)
+        {
             if (!ModelState.IsValid)
+            { 
+                return BadRequest(ModelState);
+        }
+var enderecoObjeto = await _context.Enderecos.FindAsync(filialDTO.IdEndereco);
+            if (enderecoObjeto == null)
             {
-                return BadRequest(filial);
+                return BadRequest("Não foi possível encontrar o endereço passado");
             }
 
-            _context.Filiais.Add(filial);
+            var filialCompleta = new Filial
+            {
+                Nome = filialDTO.Nome,
+                IdEndereco = filialDTO.IdEndereco,
+                Endereco = enderecoObjeto
+            };
+            _context.Filiais.Add(filialCompleta);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(Get), new { id = filial.Id }, filial);
+            return CreatedAtAction(nameof(Get), new { id = filialCompleta.Id }, filialCompleta);
         }
 
         [HttpDelete("{id}")]

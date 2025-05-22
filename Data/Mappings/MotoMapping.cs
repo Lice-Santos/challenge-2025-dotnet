@@ -27,6 +27,11 @@ namespace Tria_2025.Data.Mappings
 
             builder.Property(m => m.IdFilial)
                 .IsRequired();
-        }
+
+            builder.HasOne(f => f.Filial)
+                .WithMany()
+                .HasForeignKey(f => f.IdFilial)
+                .OnDelete(DeleteBehavior.Cascade);
+                    }
     }
 }

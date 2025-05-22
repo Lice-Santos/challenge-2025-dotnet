@@ -139,10 +139,11 @@ C:\fiap-2025\net\Tria-2025\Tria-2025\obj\Debug\net8.0\staticwebassets\msbuild.bu
 C:\fiap-2025\net\Tria-2025\Tria-2025\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Tria-2025.props
 C:\fiap-2025\net\Tria-2025\Tria-2025\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Tria-2025.props
 C:\fiap-2025\net\Tria-2025\Tria-2025\obj\Debug\net8.0\staticwebassets.pack.json
-C:\fiap-2025\net\Tria-2025\Tria-2025\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\fiap-2025\net\Tria-2025\Tria-2025\obj\Debug\net8.0\Tria-2025.csproj.Up2Date
 C:\fiap-2025\net\Tria-2025\Tria-2025\obj\Debug\net8.0\Tria-2025.dll
 C:\fiap-2025\net\Tria-2025\Tria-2025\obj\Debug\net8.0\refint\Tria-2025.dll
 C:\fiap-2025\net\Tria-2025\Tria-2025\obj\Debug\net8.0\Tria-2025.pdb
 C:\fiap-2025\net\Tria-2025\Tria-2025\obj\Debug\net8.0\Tria-2025.genruntimeconfig.cache
 C:\fiap-2025\net\Tria-2025\Tria-2025\obj\Debug\net8.0\ref\Tria-2025.dll
+C:\fiap-2025\net\Tria-2025\Tria-2025\obj\Debug\net8.0\Tria-2025.sourcelink.json
+C:\fiap-2025\net\Tria-2025\Tria-2025\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
