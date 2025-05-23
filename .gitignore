@@ -1,0 +1,72 @@
+## Compilados binários
+bin/
+obj/
+
+## Pacotes do NuGet
+*.nupkg
+*.snupkg
+packages/
+# Caso você esteja utilizando o NuGet antigo (package.config)
+project.lock.json
+project.fragment.lock.json
+
+## Arquivos de build
+*.dll
+*.exe
+*.app
+*.pdb
+*.cache
+*.mdb
+
+## Configurações de usuário
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+.vscode/
+.vs/
+
+## Arquivos temporários
+*.log
+*.tmp
+*.bak
+*.swp
+*~
+
+## Publicações
+publish/
+out/
+artifacts/
+
+## Testes e cobertura
+TestResults/
+*.coverage
+*.coveragexml
+*.codecoverage
+
+## Configuração local do Rider ou VS Code
+.idea/
+.vscode/
+
+## Outros
+_ReSharper*/
+*.resharper
+*.DotSettings.user
+*.ncrunch*
+*.orig
+
+# Certificados gerados
+*.pfx
+*.key
+
+# Configurações de ambiente local
+.env
+.env.*
+
+# Logs
+logs/
+*.log
+
+# Arquivos gerados pelo sistema
+Thumbs.db
+desktop.ini
