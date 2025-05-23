@@ -16,12 +16,14 @@ namespace Tria_2025.Controllers
             _context = context;
         }
 
+        //GET
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Funcionario>>> Get()
         {
             return await _context.Funcionarios.ToListAsync();
         }
 
+        //GET por id
         [HttpGet("{id}")]
         public async Task<ActionResult<Funcionario>> Get(int id)
         {
@@ -31,10 +33,10 @@ namespace Tria_2025.Controllers
                 return NotFound();
             }
 
-            return funcionario;
+            return Ok(funcionario);
         }
 
-        // TODO: está retornando 500
+        // GET pelo nome do funcionário
 
         [HttpGet("nome/{nomeFuncionario}")]
         public async Task<ActionResult<List<Funcionario>>> BuscarFuncionarioPorNome(string nomeFuncionario)
@@ -45,9 +47,10 @@ namespace Tria_2025.Controllers
                 return NotFound();
             }
 
-            return funcionarios;
+            return Ok(funcionarios);
         }
 
+        //Simula um login
         [HttpGet("login")]
         public async Task<ActionResult<string>> BuscarDadosParaLogin(string email, string senha)
         {
@@ -60,6 +63,7 @@ namespace Tria_2025.Controllers
             return Ok($"Seja bem vindo {funcionario.Nome}");
         }
 
+        //Busca todos os funcionários com o cargo passado
         [HttpGet("cargo/{cargo}")]
         public async Task<ActionResult<List<Funcionario>>> BuscarPorCargo(string cargo)
         {
@@ -69,11 +73,10 @@ namespace Tria_2025.Controllers
                 return NotFound("Nenhum funcionário encontrado");
             }
 
-            return funcionarios;
+            return Ok(funcionarios);
         }
 
-
-
+        //PUT
         [HttpPut("{idPassado}")]
         public async Task<ActionResult> Put(int idPassado, Funcionario funcionario)
         {
@@ -100,11 +103,11 @@ namespace Tria_2025.Controllers
             if (funcionario.Senha != null)
                 funcionarioBuscado.Senha = funcionario.Senha;
 
-
             await _context.SaveChangesAsync();
             return NoContent();
         }
 
+        //POST
         [HttpPost]
         public async Task<ActionResult> Post(Funcionario funcionario)
         {
@@ -119,6 +122,7 @@ namespace Tria_2025.Controllers
             return CreatedAtAction(nameof(Get), new { id = funcionario.Id }, funcionario);
         }
 
+        //DELETE
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

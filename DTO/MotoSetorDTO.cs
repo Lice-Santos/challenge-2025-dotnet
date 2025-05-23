@@ -1,6 +1,6 @@
 ﻿namespace Tria_2025.DTO
 {
-    public class MotoSetorDto
+    public class MotoSetorDTO
     {
         public DateTime Data { get; set; }
         public string Fonte { get; set; }

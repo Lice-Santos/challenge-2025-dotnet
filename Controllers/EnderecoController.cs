@@ -5,6 +5,7 @@ using Tria_2025.Models;
 
 namespace Tria_2025.Controllers
 {
+    //CRUD Endereco
     [ApiController]
     [Route("api/[controller]")]
     public class EnderecoController : ControllerBase
@@ -15,6 +16,8 @@ namespace Tria_2025.Controllers
         {
             _context = context;
         }
+
+        //GET
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Endereco>>> Get()
@@ -31,8 +34,10 @@ namespace Tria_2025.Controllers
                 return NotFound();
             }
 
-                return endereco;
+                return Ok(endereco);
         }
+
+        //pesquisa pelo cep do endereço
 
         [HttpGet("/cep/{cep}")]
         public async Task<ActionResult<Endereco>> BuscarPorCep(string cep)
@@ -43,8 +48,10 @@ namespace Tria_2025.Controllers
                 return NotFound();
             }
 
-            return endereco;
+            return Ok(endereco);
         }
+
+        //pesquisa todos os endereços que possuam o logradouro igual ao passado
 
         [HttpGet("/logradouro/{logradouro}")]
         public async Task<ActionResult<List<Endereco>>> BuscarPorLogradouro(string logradouro)
@@ -55,8 +62,10 @@ namespace Tria_2025.Controllers
                 return NotFound();
             }
 
-            return enderecos;
+            return Ok(enderecos);
         }
+
+        //PUT
 
         [HttpPut("{idPassado}")]
         public async Task<ActionResult> Put(int idPassado, Endereco endereco)
@@ -95,6 +104,7 @@ namespace Tria_2025.Controllers
             return NoContent();
         }
 
+        //POST
         [HttpPost]
         public async Task<ActionResult> Post(Endereco endereco)
         {
@@ -109,6 +119,7 @@ namespace Tria_2025.Controllers
             return CreatedAtAction(nameof(Get), new { id = endereco.Id }, endereco);
         }
 
+        //DELETE
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

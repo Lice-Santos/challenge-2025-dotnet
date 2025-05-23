@@ -23,6 +23,7 @@ namespace Tria_2025.Controllers
             return await _context.Moto_Setores.ToListAsync();
         }
 
+        //Buscar por ID
         [HttpGet("{id}")]
         public async Task<ActionResult<MotoSetor>> Get(int id)
         {
@@ -35,34 +36,22 @@ namespace Tria_2025.Controllers
             return motoSetor;
         }
 
-        //[HttpGet("placa/{placa}")]
-        //public async Task<ActionResult<Moto>> BuscarPorPlaca(string placa)
-        //{
-        //    var motoSetor = await _context.Moto_Setores
-        //        .Include(ms => ms.Moto)
-        //        .Include(ms => ms.Setor)
-        //        .Where(ms => ms.Moto.Placa == placa)
-        //        .Select(ms => new MotoSetorDto
-        //        {
-        //            Id = ms.Id,
-        //            Data = ms.Data,
-        //            Fonte = ms.Fonte,
-        //            MotoPlaca = ms.Moto.Placa,
-        //            MotoModelo = ms.Moto.Modelo,
-        //            SetorNome = ms.Setor.Nome
-        //        })
-        //        .FirstOrDefaultAsync();
+        //Buscar por placa 
+        [HttpGet("placa/{placa}")]
+        public async Task<ActionResult<List<MotoSetor>>> BuscarPorPlaca(string placa)
+        {
+            var motoBuscada = await _context.Motos.FirstOrDefaultAsync(m => m.Placa == placa);
+            var registrosEncontrados = await _context.Moto_Setores.Where(ms => ms.IdMoto == motoBuscada.Id).ToListAsync();
 
-        //    if (motoSetor == null)
-        //    {
-        //        return NotFound("Nenhuma moto registrada com a placa informada.");
-        //    }
+            if (registrosEncontrados == null) { 
+                return NotFound("Nenhum registro encontrado");
+            }
+            return Ok(registrosEncontrados);
+        }
 
-        //    return motoSetor;
-        //}
-
+        //PUT
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, MotoSetorDto dto)
+        public async Task<ActionResult> Put(int id, MotoSetorDTO dto)
         {
             var entidade = await _context.Moto_Setores.FindAsync(id);
             if (entidade == null)
@@ -86,9 +75,9 @@ namespace Tria_2025.Controllers
             return NoContent();
         }
 
-
+        //POST
         [HttpPost]
-        public async Task<ActionResult> Post(MotoSetorDto motoSetorDto)
+        public async Task<ActionResult> Post(MotoSetorDTO motoSetorDto)
         {
 
             if (!ModelState.IsValid)
@@ -118,6 +107,7 @@ namespace Tria_2025.Controllers
             return CreatedAtAction(nameof(Get), new { id = motoSetorCompleto.Id }, motoSetorCompleto);
         }
 
+        //DELETE
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

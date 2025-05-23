@@ -8,6 +8,7 @@ namespace Tria_2025.Data.Mappings
     {
         public void Configure(EntityTypeBuilder<Filial> builder)
         {
+            //Mapeando restrições e linhas da tabela Filial
             builder.ToTable("Filial");
 
             builder.HasKey(f => f.Id);
@@ -19,7 +20,7 @@ namespace Tria_2025.Data.Mappings
             builder.Property(f => f.IdEndereco)
                 .IsRequired();
 
-            //Configuração relacionamento
+            //Declarando os relacionamentos e as chaves estrangeiras da tabela
             builder.HasOne(f => f.Endereco)
                 .WithMany() 
                 .HasForeignKey(f => f.IdEndereco)

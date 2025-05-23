@@ -8,6 +8,7 @@ namespace Tria_2025.Data.Mappings
     {
         public void Configure(EntityTypeBuilder<Endereco> builder)
         {
+            //Mapeando restrições e linhas da tabela Endereco
             builder.ToTable("Endereco");
 
             builder.HasKey(e => e.Id);

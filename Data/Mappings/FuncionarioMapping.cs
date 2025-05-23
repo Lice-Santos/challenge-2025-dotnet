@@ -8,6 +8,7 @@ namespace Tria_2025.Data.Mappings
     {
         public void Configure(EntityTypeBuilder<Funcionario> builder)
         {
+            //Mapeando restrições e linhas da tabela Funcionario
             builder.ToTable("Funcionario");
 
             builder.HasKey(f => f.Id);

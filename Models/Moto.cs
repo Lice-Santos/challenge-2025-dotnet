@@ -13,6 +13,7 @@ namespace Tria_2025.Models
         public int Ano { get; set; }
         public string TipoCombustivel { get; set; }
         public int IdFilial { get; set; }
+        //chave estrangeira mapeada no mapping
         [JsonIgnore]
         public virtual Filial Filial { get; set; }
 

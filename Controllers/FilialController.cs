@@ -19,12 +19,14 @@ namespace Tria_2025.Controllers
             _context = context;
         }
 
+        //GET
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Filial>>> Get()
         {
             return await _context.Filiais.ToListAsync();
         }
 
+        //Busca pelo id
         [HttpGet("{id}")]
         public async Task<ActionResult<Filial>> BuscarPorId(int id)
         {
@@ -34,9 +36,10 @@ namespace Tria_2025.Controllers
                 return NotFound();
             }
 
-            return filial;
+            return Ok(filial);
         }
 
+        //Busca pelo nome da filial
         [HttpGet("nome/{nomeFilial}")]
         public async Task<ActionResult<List<Filial>>> BuscarPorNome(string nomeFilial)
         {
@@ -46,7 +49,7 @@ namespace Tria_2025.Controllers
                 return NotFound();
             }
 
-            return filiais;
+            return Ok(filiais);
         }
 
         [HttpPut("{idPassado}")]

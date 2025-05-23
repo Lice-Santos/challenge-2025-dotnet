@@ -17,12 +17,14 @@ namespace Tria_2025.Controllers
             _context = context;
         }
 
+        //GET
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Moto>>> Get()
         {
             return await _context.Motos.ToListAsync();
         }
 
+        //GET por ID
         [HttpGet("{id}")]
         public async Task<ActionResult<Moto>> Get(int id)
         {
@@ -35,6 +37,7 @@ namespace Tria_2025.Controllers
             return Ok(moto);
         }
 
+        //Busca todas as motos que possuam o ano igual ou maior que o passado
         [HttpGet("ano/{ano}")]
         public async Task<ActionResult<List<Moto>>> BuscarMotosAcimaDoAno(int ano)
         {
@@ -46,6 +49,7 @@ namespace Tria_2025.Controllers
             return Ok(motos);
         }
 
+        //Busca uma moto pela placa
         [HttpGet("placa/{placa}")]
         public async Task<ActionResult<Moto>> BuscarPorPlaca(string placa)
         {
@@ -55,9 +59,10 @@ namespace Tria_2025.Controllers
                 return NotFound("Nenhuma moto registrada com a placa informada.");
             }
 
-            return moto;
+            return Ok(moto);
         }
 
+        //Busca todas as motos com o modelo passado
         [HttpGet("modelo/{modelo}")]
         public async Task<ActionResult<List<Moto>>> BuscarPorModelo(string modelo)
         {
@@ -70,6 +75,7 @@ namespace Tria_2025.Controllers
             return Ok(motos);
         }
 
+        //PUT
         [HttpPut("{idPassado}")]
         public async Task<ActionResult> Put(int idPassado, MotoDTO motoDTO)
         {
@@ -79,14 +85,13 @@ namespace Tria_2025.Controllers
                 return NotFound($"Não foi possível encontrar uma moto com o id {idPassado}");
             }
 
-            // Verifica se a filial existe
+            //Buscando com o id passado se a filial existe
             var filial = await _context.Filiais.FindAsync(motoDTO.IdFilial);
             if (filial == null)
             {
                 return BadRequest("Não foi possível encontrar a filial informada.");
             }
 
-            // Atualiza os campos da moto
             motoBuscada.Placa = motoDTO.Placa;
             motoBuscada.Modelo = motoDTO.Modelo;
             motoBuscada.TipoCombustivel = motoDTO.TipoCombustivel;
@@ -98,6 +103,7 @@ namespace Tria_2025.Controllers
             return NoContent();
         }
 
+        //POST
         [HttpPost]
         public async Task<ActionResult> Post(MotoDTO motoDTO)
         {
@@ -128,6 +134,7 @@ namespace Tria_2025.Controllers
             return CreatedAtAction(nameof(Get), new { id = motoCompleta.Id }, motoCompleta);
         }
 
+        //DELETE
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

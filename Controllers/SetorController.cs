@@ -16,12 +16,14 @@ namespace Tria_2025.Controllers
             _context = context;
         }
 
+        //GET
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Setor>>> Get()
         {
             return await _context.Setores.ToListAsync();
         }
 
+        //Buscar por ID
         [HttpGet("{id}")]
         public async Task<ActionResult<Setor>> Get(int id)
         {
@@ -31,9 +33,10 @@ namespace Tria_2025.Controllers
                 return NotFound();
             }
 
-            return setor;
+            return Ok(setor);
         }
 
+        //PUT
         [HttpPut("{idPassado}")]
         public async Task<ActionResult> Put(int idPassado, Setor setor)
         {
@@ -56,6 +59,7 @@ namespace Tria_2025.Controllers
             return NoContent();
         }
 
+        //POST
         [HttpPost]
         public async Task<ActionResult> Post(Setor setor)
         {
@@ -70,6 +74,7 @@ namespace Tria_2025.Controllers
             return CreatedAtAction(nameof(Get), new { id = setor.Id }, setor);
         }
 
+        //DELETE
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

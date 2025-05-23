@@ -612,7 +612,7 @@
     "Parameters": [
       {
         "Name": "motoSetorDto",
-        "Type": "Tria_2025.DTO.MotoSetorDto",
+        "Type": "Tria_2025.DTO.MotoSetorDTO",
         "IsRequired": true
       }
     ],
@@ -659,7 +659,7 @@
       },
       {
         "Name": "dto",
-        "Type": "Tria_2025.DTO.MotoSetorDto",
+        "Type": "Tria_2025.DTO.MotoSetorDTO",
         "IsRequired": true
       }
     ],
@@ -680,6 +680,32 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Tria_2025.Controllers.MotoSetorController",
+    "Method": "BuscarPorPlaca",
+    "RelativePath": "api/MotoSetor/placa/{placa}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "placa",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[Tria_2025.Models.MotoSetor, Tria-2025, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "Tria_2025.Controllers.SetorController",

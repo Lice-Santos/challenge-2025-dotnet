@@ -9,6 +9,7 @@ namespace Tria_2025.Models
     {
         public int Id { get; set; }
         public string Nome { get; set; }
+        //chave estrangeira mapeada no mapping
         public int IdEndereco { get; set; }
         [JsonIgnore]
         public virtual Endereco Endereco { get; set; }

@@ -8,6 +8,7 @@ namespace Tria_2025.Data.Mappings
     {
         public void Configure(EntityTypeBuilder<Moto> builder)
         {
+            //Mapeando restrições e linhas da tabela Moto
             builder.ToTable("Moto");
 
             builder.HasKey(m => m.Id);
@@ -28,10 +29,11 @@ namespace Tria_2025.Data.Mappings
             builder.Property(m => m.IdFilial)
                 .IsRequired();
 
+            //Declarando os relacionamentos e as chaves estrangeiras da tabela
             builder.HasOne(f => f.Filial)
                 .WithMany()
                 .HasForeignKey(f => f.IdFilial)
                 .OnDelete(DeleteBehavior.Cascade);
-                    }
+            }
     }
 }

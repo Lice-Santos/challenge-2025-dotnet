@@ -1142,17 +1142,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/MotoSetorDto"
+                "$ref": "#/components/schemas/MotoSetorDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/MotoSetorDto"
+                "$ref": "#/components/schemas/MotoSetorDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/MotoSetorDto"
+                "$ref": "#/components/schemas/MotoSetorDTO"
               }
             }
           }
@@ -1222,17 +1222,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/MotoSetorDto"
+                "$ref": "#/components/schemas/MotoSetorDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/MotoSetorDto"
+                "$ref": "#/components/schemas/MotoSetorDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/MotoSetorDto"
+                "$ref": "#/components/schemas/MotoSetorDTO"
               }
             }
           }
@@ -1261,6 +1261,54 @@
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MotoSetor/placa/{placa}": {
+      "get": {
+        "tags": [
+          "MotoSetor"
+        ],
+        "parameters": [
+          {
+            "name": "placa",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MotoSetor"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MotoSetor"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MotoSetor"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -1478,9 +1526,6 @@
   "components": {
     "schemas": {
       "Endereco": {
-        "required": [
-          "logradouro"
-        ],
         "type": "object",
         "properties": {
           "id": {
@@ -1488,27 +1533,22 @@
             "format": "int32"
           },
           "logradouro": {
-            "maxLength": 250,
-            "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "cidade": {
-            "maxLength": 50,
             "type": "string",
             "nullable": true
           },
           "estado": {
-            "maxLength": 50,
             "type": "string",
             "nullable": true
           },
           "numero": {
-            "maxLength": 10,
             "type": "string",
             "nullable": true
           },
           "complemento": {
-            "maxLength": 100,
             "type": "string",
             "nullable": true
           },
@@ -1556,11 +1596,6 @@
         "additionalProperties": false
       },
       "Funcionario": {
-        "required": [
-          "email",
-          "nome",
-          "senha"
-        ],
         "type": "object",
         "properties": {
           "id": {
@@ -1568,24 +1603,20 @@
             "format": "int32"
           },
           "nome": {
-            "maxLength": 250,
-            "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "cargo": {
-            "maxLength": 50,
             "type": "string",
             "nullable": true
           },
           "email": {
-            "maxLength": 80,
-            "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "senha": {
-            "maxLength": 30,
-            "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1672,7 +1703,7 @@
         },
         "additionalProperties": false
       },
-      "MotoSetorDto": {
+      "MotoSetorDTO": {
         "type": "object",
         "properties": {
           "data": {
@@ -1695,9 +1726,6 @@
         "additionalProperties": false
       },
       "Setor": {
-        "required": [
-          "nome"
-        ],
         "type": "object",
         "properties": {
           "id": {
@@ -1705,8 +1733,8 @@
             "format": "int32"
           },
           "nome": {
-            "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
