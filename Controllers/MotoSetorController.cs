@@ -40,7 +40,11 @@ namespace Tria_2025.Controllers
         [HttpGet("placa/{placa}")]
         public async Task<ActionResult<List<MotoSetor>>> BuscarPorPlaca(string placa)
         {
-            var motoBuscada = await _context.Motos.FirstOrDefaultAsync(m => m.Placa == placa);
+            var motoBuscada = await _context.Motos.FirstOrDefaultAsync(m => m.Placa.ToLower() == placa.ToLower());
+            if (motoBuscada == null)
+            {
+                return NotFound($"Nenhuma moto registrada com a placa {placa}");
+            }
             var registrosEncontrados = await _context.Moto_Setores.Where(ms => ms.IdMoto == motoBuscada.Id).ToListAsync();
 
             if (registrosEncontrados == null) { 
