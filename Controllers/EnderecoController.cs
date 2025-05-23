@@ -39,7 +39,7 @@ namespace Tria_2025.Controllers
 
         //pesquisa pelo cep do endereço
 
-        [HttpGet("/cep/{cep}")]
+        [HttpGet("cep/{cep}")]
         public async Task<ActionResult<Endereco>> BuscarPorCep(string cep)
         {
             var endereco = await _context.Enderecos.FirstOrDefaultAsync(c => c.Cep == cep);
@@ -53,7 +53,7 @@ namespace Tria_2025.Controllers
 
         //pesquisa todos os endereços que possuam o logradouro igual ao passado
 
-        [HttpGet("/logradouro/{logradouro}")]
+        [HttpGet("logradouro/{logradouro}")]
         public async Task<ActionResult<List<Endereco>>> BuscarPorLogradouro(string logradouro)
         {
             var enderecos = await _context.Enderecos.Where(c => c.Logradouro.ToLower().Contains(logradouro.ToLower())).ToListAsync();

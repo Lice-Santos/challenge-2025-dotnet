@@ -99,6 +99,58 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Tria_2025.Controllers.EnderecoController",
+    "Method": "BuscarPorCep",
+    "RelativePath": "api/Endereco/cep/{cep}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cep",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Tria_2025.Models.Endereco",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Tria_2025.Controllers.EnderecoController",
+    "Method": "BuscarPorLogradouro",
+    "RelativePath": "api/Endereco/logradouro/{logradouro}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "logradouro",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[Tria_2025.Models.Endereco, Tria-2025, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Tria_2025.Controllers.FilialController",
     "Method": "Get",
     "RelativePath": "api/Filial",
@@ -805,58 +857,6 @@
       }
     ],
     "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Tria_2025.Controllers.EnderecoController",
-    "Method": "BuscarPorCep",
-    "RelativePath": "cep/{cep}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "cep",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Tria_2025.Models.Endereco",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "Tria_2025.Controllers.EnderecoController",
-    "Method": "BuscarPorLogradouro",
-    "RelativePath": "logradouro/{logradouro}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "logradouro",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.List\u00601[[Tria_2025.Models.Endereco, Tria-2025, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
   },
   {
     "ContainingType": "Tria_2025.Controllers.WeatherForecastController",

@@ -133,7 +133,7 @@
         }
       }
     },
-    "/cep/{cep}": {
+    "/api/Endereco/cep/{cep}": {
       "get": {
         "tags": [
           "Endereco"
@@ -172,7 +172,7 @@
         }
       }
     },
-    "/logradouro/{logradouro}": {
+    "/api/Endereco/logradouro/{logradouro}": {
       "get": {
         "tags": [
           "Endereco"

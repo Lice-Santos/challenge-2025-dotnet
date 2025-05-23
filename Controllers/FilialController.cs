@@ -61,14 +61,12 @@ namespace Tria_2025.Controllers
                 return NotFound($"Não foi possível encontrar uma filial com o ID {idPassado}.");
             }
 
-            // Valida se o IdEndereco existe
             var endereco = await _context.Enderecos.FindAsync(filialDTO.IdEndereco);
             if (endereco == null)
             {
                 return BadRequest("Endereço inválido. Não foi possível encontrar o endereço informado.");
             }
 
-            // Atualiza os campos
             filialBuscada.Nome = filialDTO.Nome;
             filialBuscada.IdEndereco = filialDTO.IdEndereco;
 
@@ -84,7 +82,7 @@ namespace Tria_2025.Controllers
             { 
                 return BadRequest(ModelState);
         }
-var enderecoObjeto = await _context.Enderecos.FindAsync(filialDTO.IdEndereco);
+            var enderecoObjeto = await _context.Enderecos.FindAsync(filialDTO.IdEndereco);
             if (enderecoObjeto == null)
             {
                 return BadRequest("Não foi possível encontrar o endereço passado");
